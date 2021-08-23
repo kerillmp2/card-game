@@ -3,11 +3,11 @@ package core.actions;
 import core.player.Player;
 
 public class ActionWithDescriptionFactory {
-    public static ActionWithDescription create(Action action, String description) {
-        return new ActionWithDescription() {
+    public static ResolvableWithDescription create(Resolvable resolvable, String description) {
+        return new ResolvableWithDescription() {
             @Override
             public Player resolve(Player player) {
-                return action.resolve(player);
+                return resolvable.resolve(player);
             }
 
             @Override

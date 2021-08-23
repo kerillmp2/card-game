@@ -1,8 +1,8 @@
 package core.battlefield;
 
-import core.actions.Action;
+import core.actions.Resolvable;
 import core.player.Player;
 
 public interface CanLeaveBattlefield {
-    Action onLeaveBattlefield(Player owner);
+    Resolvable onLeaveBattlefield(Player owner);
 }

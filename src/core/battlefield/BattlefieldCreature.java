@@ -1,7 +1,7 @@
 package core.battlefield;
 
-import core.actions.Action;
-import core.actions.ActionWithDescription;
+import core.actions.Resolvable;
+import core.actions.ResolvableWithDescription;
 import core.actions.ActionWithDescriptionFactory;
 import core.player.Player;
 import core.utils.*;
@@ -18,7 +18,7 @@ public class BattlefieldCreature implements BattlefieldObject, Attackable, Attac
     private int attack;
     private boolean isAttacker;
     private boolean isAttackable;
-    private final List<ActionWithDescription> actions;
+    private final List<ResolvableWithDescription> actions;
 
     public BattlefieldCreature(
             String name,
@@ -27,7 +27,7 @@ public class BattlefieldCreature implements BattlefieldObject, Attackable, Attac
             int attack,
             boolean isAttackable,
             boolean isAttacker,
-            List<ActionWithDescription> actions) {
+            List<ResolvableWithDescription> actions) {
         this.name = name;
         this.maxHp = maxHp;
         this.currentHp = currentHp;
@@ -42,7 +42,7 @@ public class BattlefieldCreature implements BattlefieldObject, Attackable, Attac
     }
 
     @Override
-    public List<ActionWithDescription> getActions() {
+    public List<ResolvableWithDescription> getActions() {
         return actions;
     }
 
@@ -85,7 +85,7 @@ public class BattlefieldCreature implements BattlefieldObject, Attackable, Attac
     }
 
     @Override
-    public Action onLeaveBattlefield(Player owner) {
+    public Resolvable onLeaveBattlefield(Player owner) {
         return player -> {
             System.out.println("Существо " + name + " покинуло поле");
             return player;
@@ -120,7 +120,7 @@ public class BattlefieldCreature implements BattlefieldObject, Attackable, Attac
         return this.currentHp <= 0;
     }
 
-    public void addAction(ActionWithDescription action) {
+    public void addAction(ResolvableWithDescription action) {
         this.actions.add(action);
     }
 

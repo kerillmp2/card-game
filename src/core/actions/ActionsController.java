@@ -9,7 +9,7 @@ import java.util.Stack;
 public class ActionsController {
     private static final int STACK_LIMIT = 1000;
     private static final int ITERATIONS_LIMIT = 1500;
-    private final Stack<Action> actionStack = new Stack<>();
+    private final Stack<Resolvable> resolvableStack = new Stack<>();
     private final Battlefield battlefield;
     private int size = 0;
 
@@ -17,11 +17,11 @@ public class ActionsController {
         this.battlefield = battlefield;
     }
 
-    public void addAction(Action action) {
+    public void addAction(Resolvable resolvable) {
         if (size >= STACK_LIMIT) {
             return;
         }
-        this.actionStack.add(action);
+        this.resolvableStack.add(resolvable);
         size += 1;
     }
 
@@ -35,24 +35,24 @@ public class ActionsController {
         for(BattlefieldObject corpse : opponentSideCorpses) {
             this.addAction(corpse.onLeaveBattlefield(battlefield.getOpponent()));
         }
-        this.re
+qwe
     }
 
     public void resolveNextOnActivePlayer() {
-        this.actionStack.pop().resolve(battlefield.getActivePlayer());
+        this.resolvableStack.pop().resolve(battlefield.getActivePlayer());
         afterActionResolve();
         size -= 1;
     }
 
     public void resolveNextOnOpponent() {
-        this.actionStack.pop().resolve(battlefield.getOpponent());
+        this.resolvableStack.pop().resolve(battlefield.getOpponent());
         afterActionResolve();
         size -= 1;
     }
 
     public void resolveAllOnActivePlayer() {
         int stackOverflow = 0;
-        while (!actionStack.empty()) {
+        while (!resolvableStack.empty()) {
             resolveNextOnActivePlayer();
             stackOverflow += 1;
             if (stackOverflow >= ITERATIONS_LIMIT) {
@@ -63,7 +63,7 @@ public class ActionsController {
 
     public void resolveAllOnOpponent() {
         int stackOverflow = 0;
-        while (!actionStack.empty()) {
+        while (!resolvableStack.empty()) {
             resolveNextOnOpponent();
             stackOverflow += 1;
             if (stackOverflow >= ITERATIONS_LIMIT) {

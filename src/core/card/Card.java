@@ -2,7 +2,7 @@ package core.card;
 
 import core.player.Player;
 import core.player.Resource;
-import core.actions.Action;
+import core.actions.Resolvable;
 import core.utils.Selectable;
 import core.utils.WithDescription;
 
@@ -11,30 +11,30 @@ import java.util.TreeMap;
 
 public class Card implements Selectable, WithDescription {
     private String name = "core.card.Card";
-    private Action onPlay;
+    private Resolvable onPlay;
     private String description = "...";
     private Map<Resource, Integer> cost = new TreeMap<>();
 
-    public Card(String name, Action onPlay, int manacost, String description) {
+    public Card(String name, Resolvable onPlay, int manacost, String description) {
         this.name = name;
         this.onPlay = onPlay;
         this.cost.put(Resource.MANA, manacost);
         this.description = description;
     }
 
-    public Card(String name, Action onPlay, int manacost) {
+    public Card(String name, Resolvable onPlay, int manacost) {
         this.name = name;
         this.onPlay = onPlay;
         this.cost.put(Resource.MANA, manacost);
     }
 
-    public Card(String name, Action onPlay, Map<Resource, Integer> cost) {
+    public Card(String name, Resolvable onPlay, Map<Resource, Integer> cost) {
         this.name = name;
         this.onPlay = onPlay;
         this.cost = cost;
     }
 
-    public Card(String name, Action onPlay) {
+    public Card(String name, Resolvable onPlay) {
         this.name = name;
         this.onPlay = onPlay;
     }

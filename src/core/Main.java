@@ -5,34 +5,34 @@ import core.battlefield.BattlefieldCreatureFactory;
 import core.card.Card;
 import core.player.Deck;
 import core.player.Player;
-import core.actions.Action;
+import core.actions.Resolvable;
 import core.player.Resource;
 import core.player.ResourcePool;
 import core.turn.TurnController;
 
 public class Main {
     public static void main(String[] args) {
-        Action heal1 = (player) -> {
+        Resolvable heal1 = (player) -> {
             player.recover(1);
             player.getGraveyard().putCardOnTop(player.getPlayedCard());
             return player;
         };
 
-        Action drain = (player) -> {
+        Resolvable drain = (player) -> {
             player.getBattlefield().getOpponent(player).getDamage(1);
             player.recover(1);
             player.getGraveyard().putCardOnTop(player.getPlayedCard());
             return player;
         };
 
-        Action heal_draw = (player) -> {
+        Resolvable heal_draw = (player) -> {
             player.recover(1);
             player.drawCard();
             player.getGraveyard().putCardOnTop(player.getPlayedCard());
             return player;
         };
 
-        Action create_snake_token = player -> {
+        Resolvable create_snake_token = player -> {
             player.getBattlefield().getActiveSide().addObject(BattlefieldCreatureFactory.create("Змея", 10, 15));
             player.getGraveyard().putCardOnTop(player.getPlayedCard());
             player.getHand().add(player.getPlayedCard());

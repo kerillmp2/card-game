@@ -1,6 +1,6 @@
 package core.turn;
 
-import core.actions.ActionWithDescription;
+import core.actions.ResolvableWithDescription;
 import core.actions.ActionWithDescriptionFactory;
 import core.battlefield.Battlefield;
 import core.battlefield.BattlefieldObject;
@@ -72,7 +72,7 @@ public class TurnController {
         System.out.println("\n" + selectedObject.getMainView() + "\n");
         System.out.println(this.battlefield);
         int selectedInCardOption = -2;
-        List<ActionWithDescription> onCardOptions = new ArrayList<>();
+        List<ResolvableWithDescription> onCardOptions = new ArrayList<>();
         onCardOptions.add(ActionWithDescriptionFactory.create(p -> null, "Назад"));
         onCardOptions.addAll(selectedObject.getActions());
         selectedInCardOption = Selector.selectWithDescription(onCardOptions);
